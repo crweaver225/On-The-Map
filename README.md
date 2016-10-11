@@ -9,7 +9,7 @@
 - When user's first open up the app, they are prompted to sign into the app using their Udacity account credentials. These credentials are necessary
 in order to use the app. User's can sign up from the login page of the app. 
 
-- The app is currently written for Swift 2.2 and for iOS 7-9. It is currently not compatible with Swift 3 or iOS 10.
+- The app is now written in Swift 3 and compatible with iOS 10. 
 
 ## Other Things to Know:
 
