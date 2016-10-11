@@ -10,12 +10,12 @@ import Foundation
 
 extension Udacity {
     
- func udacityURLFromParameters(parameters: String) -> NSURL {
+ func udacityURLFromParameters(_ parameters: String) -> URL {
     
-    let components = NSURLComponents()
+    var components = URLComponents()
     components.scheme = Udacity.Constants.ApiScheme
     components.host = Udacity.Constants.ApiHost
     components.path = Udacity.Constants.ApiPath + parameters
-    return components.URL!
+    return components.url!
     }
 }

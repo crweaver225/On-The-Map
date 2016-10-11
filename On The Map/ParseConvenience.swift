@@ -13,7 +13,7 @@ var parseObjectID = ""
 
 extension Parse {
 
-    func overridePost(mapString: String, long: Double, lat: Double, mediaURL: String, completionHandlerForPost: (success: Bool, error: String?) -> Void) {
+    func overridePost(_ mapString: String, long: Double, lat: Double, mediaURL: String, completionHandlerForPost: @escaping (_ success: Bool, _ error: String?) -> Void) {
         
         let uniqueKeys = theStudent.udacityInfo
         
@@ -39,15 +39,15 @@ extension Parse {
         taskForPostMethod(jsonBody, requestType: requestType, url: url) { (result, error) in
             
             guard (error == nil) else {
-                completionHandlerForPost(success: false, error: "could not find website")
+                completionHandlerForPost(false, "could not find website")
                 return
             }
             
-            completionHandlerForPost(success: true, error: nil)
+            completionHandlerForPost(true, nil)
         }
     }
     
-    func searchPost(completionHandlerForCheck: (success: Bool, error: String?) -> Void) {
+    func searchPost(_ completionHandlerForCheck: @escaping (_ success: Bool, _ error: String?) -> Void) {
         let uniqueKeys = theStudent.udacityInfo
         guard let uniqueKey = uniqueKeys["key"] as? String else {
             print("no unique key found")
@@ -59,33 +59,33 @@ extension Parse {
          taskForGetMethod(method) { (result, error) in
             
             guard let result = result else {
-                completionHandlerForCheck(success: false, error: "Could not find website")
+                completionHandlerForCheck(false, "Could not find website")
                 return
             }
             
             guard let options = result["results"] as? [[String: AnyObject]] else {
                 print("try again")
-                completionHandlerForCheck(success: false, error: nil)
+                completionHandlerForCheck(false, nil)
                 return
             }
 
             for items in options {
                 guard let objectID = items["objectId"] as? String else {
-                    completionHandlerForCheck(success: false, error: nil)
+                    completionHandlerForCheck(false, nil)
                     return
                 }
                 parseObjectID = objectID
             }
             
             if options.count > 0 {
-                completionHandlerForCheck(success: true,  error: nil)
+                completionHandlerForCheck(true,  nil)
             } else {
-                completionHandlerForCheck(success: false, error: nil)
+                completionHandlerForCheck(false, nil)
             }
         }
     }
     
-    func postStudentLocation(mapString: String, long: Double, lat: Double, mediaURL: String, completionHandlerForPost: (success: Bool, error: String?) -> Void) {
+    func postStudentLocation(_ mapString: String, long: Double, lat: Double, mediaURL: String, completionHandlerForPost: @escaping (_ success: Bool, _ error: String?) -> Void) {
         
         let requestType = "POST"
         let studentInfo = theStudent.udacityInfo
@@ -110,11 +110,11 @@ extension Parse {
         
         taskForPostMethod(jsonBody, requestType: requestType, url: url) { (result, error) in
             
-                completionHandlerForPost(success: true, error: nil)
+                completionHandlerForPost(true, nil)
         }
     }
 
-    func getStudentLocations(completionHandlerForLogin: (success: Bool, error: String?) -> Void) {
+    func getStudentLocations(_ completionHandlerForLogin: @escaping (_ success: Bool, _ error: String?) -> Void) {
         
         theStudent.studentInformation.removeAll()
         
@@ -122,11 +122,11 @@ extension Parse {
         taskForGetMethod(method) { (result, error) in
             
             guard (error == nil) else {
-                completionHandlerForLogin(success: false, error: error)
+                completionHandlerForLogin(false, error)
                 return
             }
             
-            guard let parsedResult = result["results"] as? [[String:AnyObject]] else {
+            guard let parsedResult = result?["results"] as? [[String:AnyObject]] else {
                 print("parsed results show no key value of results")
                 return
             }
@@ -144,7 +144,7 @@ extension Parse {
                 }
             }
             
-            completionHandlerForLogin(success: true, error: nil)
+            completionHandlerForLogin(true, nil)
         }
     }
 }

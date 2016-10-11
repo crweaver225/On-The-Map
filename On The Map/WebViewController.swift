@@ -14,30 +14,30 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var failedMessage: UITextView!
     
-    @IBAction func doneWithWebView(sender: AnyObject) {
+    @IBAction func doneWithWebView(_ sender: AnyObject) {
         cancelWebView()
     }
     
     var urlRequest: String? = nil
-    var webViewDidLoadCompletionHandler: ((success: Bool, errorString: String?) -> Void)? = nil
+    var webViewDidLoadCompletionHandler: ((_ success: Bool, _ errorString: String?) -> Void)? = nil
     
     func cancelWebView() {
-        failedMessage.hidden = true
+        failedMessage.isHidden = true
         failedMessage.text = ""
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        failedMessage.hidden = false
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        failedMessage.isHidden = false
         failedMessage.text = "Could not find the page you are looking for: \(self.urlRequest!)"
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         webView.delegate = self
-        self.failedMessage.hidden = true
-        if let url = NSURL(string: urlRequest!) {
-            let request = NSURLRequest(URL: url)
+        self.failedMessage.isHidden = true
+        if let url = URL(string: urlRequest!) {
+            let request = URLRequest(url: url)
             webView.loadRequest(request)
         } 
     }

@@ -10,7 +10,7 @@ import Foundation
 
 final class Udacity {
     
-    var session = NSURLSession.sharedSession()
+    var session = URLSession.shared
     
     struct Constants {
         static let ApiScheme = "https"

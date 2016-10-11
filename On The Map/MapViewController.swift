@@ -15,7 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    @IBAction func refresh(sender: AnyObject) {
+    @IBAction func refresh(_ sender: AnyObject) {
         mapView.removeAnnotations(self.annotations)
         self.theData.removeAll()
         self.annotations.removeAll()
@@ -31,9 +31,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    @IBAction func postLocation(sender: AnyObject) {
-        let postLocationController = self.storyboard!.instantiateViewControllerWithIdentifier("PostLocationViewController") as! PostLocationViewController
-        self.presentViewController(postLocationController, animated: true, completion: nil)
+    @IBAction func postLocation(_ sender: AnyObject) {
+        let postLocationController = self.storyboard!.instantiateViewController(withIdentifier: "PostLocationViewController") as! PostLocationViewController
+        self.present(postLocationController, animated: true, completion: nil)
     }
     
     var theData: [theStudent.Student] = []
@@ -56,14 +56,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(annotations)
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .Red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            pinView!.pinColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {
             pinView!.annotation = annotation
@@ -71,31 +71,31 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let webDetailController = self.storyboard!.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+            let webDetailController = self.storyboard!.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
             webDetailController.urlRequest = view.annotation?.subtitle!
-            self.presentViewController(webDetailController, animated: true, completion: nil)
+            self.present(webDetailController, animated: true, completion: nil)
         }
     }
     
     func displayAlert() {
-        let downloadAlert = UIAlertController(title: "Warning", message: "We were unable to retrieve information from the server at this time", preferredStyle: UIAlertControllerStyle.Alert)
-        downloadAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+        let downloadAlert = UIAlertController(title: "Warning", message: "We were unable to retrieve information from the server at this time", preferredStyle: UIAlertControllerStyle.alert)
+        downloadAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction!) in
         }))
-        self.presentViewController(downloadAlert, animated: true, completion: nil)
+        self.present(downloadAlert, animated: true, completion: nil)
     }
 
-    @IBAction func logOut(sender: AnyObject) {
+    @IBAction func logOut(_ sender: AnyObject) {
         theStudent.studentInformation.removeAll()
         theStudent.accountInfo.removeAll()
         theStudent.udacityInfo.removeAll()
         var controller: LoginViewController
-        controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-        self.presentViewController(controller, animated: true, completion: nil)
+        controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.present(controller, animated: true, completion: nil)
     }
     
-     override func viewWillAppear(animated:Bool) {
+     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
         self.theData.removeAll()
         self.annotations.removeAll()

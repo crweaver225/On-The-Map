@@ -11,7 +11,7 @@ import Foundation
 
 final class Parse {
     
-    var session = NSURLSession.sharedSession()
+    var session = URLSession.shared
     
     struct Constants {
         static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"

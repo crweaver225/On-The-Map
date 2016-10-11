@@ -15,13 +15,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var debugTextField: UITextView!
     
-    @IBAction func signUp(sender: UITextField) {
-        let webDetailController = self.storyboard!.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+    @IBAction func signUp(_ sender: UITextField) {
+        let webDetailController = self.storyboard!.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
         webDetailController.urlRequest = "https://www.udacity.com/account/auth#!/signup"
-        self.presentViewController(webDetailController, animated: true, completion: nil)
+        self.present(webDetailController, animated: true, completion: nil)
     }
 
-    @IBAction func loginButton(sender: AnyObject) {
+    @IBAction func loginButton(_ sender: AnyObject) {
         self.view.endEditing(true)
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             debugTextField.text = "Please enter a username and password"
@@ -51,8 +51,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if success {
                     performUIUpdatesOnMain {
                         var controller: UITabBarController
-                        controller = self.storyboard!.instantiateViewControllerWithIdentifier("UITabBarController") as! UITabBarController
-                        self.presentViewController(controller, animated: true, completion: nil)
+                        controller = self.storyboard!.instantiateViewController(withIdentifier: "UITabBarController") as! UITabBarController
+                        self.present(controller, animated: true, completion: nil)
                     }
                 }
             }
@@ -60,21 +60,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
     
-    func displayAlert(text: String) {
-        let downloadAlert = UIAlertController(title: "Warning", message: text, preferredStyle: UIAlertControllerStyle.Alert)
-        downloadAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+    func displayAlert(_ text: String) {
+        let downloadAlert = UIAlertController(title: "Warning", message: text, preferredStyle: UIAlertControllerStyle.alert)
+        downloadAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction!) in
             self.debugTextField.text = ""
         }))
-        self.presentViewController(downloadAlert, animated: true, completion: nil)
+        self.present(downloadAlert, animated: true, completion: nil)
     }
 
     
-   override func shouldAutorotate() -> Bool{
+   override var shouldAutorotate : Bool{
         return false
     }
     

@@ -12,21 +12,21 @@ import Foundation
 extension Udacity {
     
     
-    func loginPostSession(userName:String, password: String, completionHandlerForLogin: (success: Bool, error: String?) -> Void) {
+    func loginPostSession(_ userName:String, password: String, completionHandlerForLogin: @escaping (_ success: Bool, _ error: String?) -> Void) {
 
         let method = Udacity.Constants.AuthenticatePost
         let methodType = "POST"
         let jsonBody = "{\"udacity\": {\"username\": \"\(userName)\", \"password\": \"\(password)\"}}"
         self.taskForPostMethod(method, methodType: methodType, cookie: nil, jsonBody: jsonBody) { (result, error)  in
             
-            func failedLogin (errors: String)  {
-                completionHandlerForLogin(success: false, error: errors)
+            func failedLogin (_ errors: String)  {
+                completionHandlerForLogin(false, errors)
             }
             guard (error == nil) else {
                 failedLogin(error!)
                 return 
             }
-            guard let parsedDictionary = result["account"] as? [String:AnyObject] else {
+            guard let parsedDictionary = result?["account"] as? [String:AnyObject] else {
                 failedLogin("Could not find acount")
                 return
             }
@@ -49,23 +49,23 @@ extension Udacity {
                         failedLogin(error!)
                         return
                     }
-                    guard let udInfo = results["user"] as? [String:AnyObject] else {
+                    guard let udInfo = results?["user"] as? [String:AnyObject] else {
                         failedLogin("Could not find user key")
                         return
                     }
                     theStudent.udacityInfo = udInfo
-                    completionHandlerForLogin(success: true, error: nil)
+                    completionHandlerForLogin(true, nil)
                 }
             }
         }
     }
     
-    func logoutDeleteSession(completionHandlerForLogout: (success: Bool, error: String?) -> Void) {
+    func logoutDeleteSession(_ completionHandlerForLogout: @escaping (_ success: Bool, _ error: String?) -> Void) {
         
         let method = Udacity.Constants.AuthenticatePost
         let methodType = "DELETE"
-        var xsrfCookie: NSHTTPCookie? = nil
-        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
         
         for cookie in sharedCookieStorage.cookies! {
             if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
@@ -74,10 +74,10 @@ extension Udacity {
         self.taskForPostMethod(method, methodType: methodType, cookie: xsrfCookie, jsonBody: nil) { (result, error)  in
         
             guard (error == nil) else {
-                completionHandlerForLogout(success: false, error: error!)
+                completionHandlerForLogout(false, error!)
                 return
             }
-            completionHandlerForLogout(success: true, error: nil)
+            completionHandlerForLogout(true, nil)
         }
     }
 }

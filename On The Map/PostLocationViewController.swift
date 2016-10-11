@@ -28,11 +28,11 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
     var longitude: Double = 0.0
     var annotations = [MKPointAnnotation]()
     
-    @IBAction func returnButton(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func returnButton(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func post(sender: AnyObject) {
+    @IBAction func post(_ sender: AnyObject) {
         if self.mediaTextField.text!.isEmpty {
             displayAlert("You have not entered a media URL. YOu cannot make a post until you do so")
         } else {
@@ -47,15 +47,15 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
                 return
             }
             if success {
-                var overrideAlert = UIAlertController(title: "Warning", message: "You have already posted your location. Do you wish to override?", preferredStyle: UIAlertControllerStyle.Alert)
-                overrideAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+                var overrideAlert = UIAlertController(title: "Warning", message: "You have already posted your location. Do you wish to override?", preferredStyle: UIAlertControllerStyle.alert)
+                overrideAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                     Parse.sharedInstance().overridePost(self.locationTextField.text!, long: self.longitude, lat: self.latitude, mediaURL: self.mediaTextField.text!) { (success, error) in
                         performUIUpdatesOnMain {
                             guard (error == nil) else {
-                                let postAlert = UIAlertController(title: "Warning", message: "We were unable to post your location to the server at this time", preferredStyle: UIAlertControllerStyle.Alert)
-                                postAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                                let postAlert = UIAlertController(title: "Warning", message: "We were unable to post your location to the server at this time", preferredStyle: UIAlertControllerStyle.alert)
+                                postAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction!) in
                                 }))
-                                self.presentViewController(postAlert, animated: true, completion: nil)
+                                self.present(postAlert, animated: true, completion: nil)
                                 return
 
                             }
@@ -63,15 +63,15 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
                         Parse.sharedInstance().getStudentLocations() { (success, error) in
                             performUIUpdatesOnMain {
                                 var controller: UITabBarController
-                                controller = self.storyboard!.instantiateViewControllerWithIdentifier("UITabBarController") as! UITabBarController
-                                self.presentViewController(controller, animated: true, completion: nil)
+                                controller = self.storyboard!.instantiateViewController(withIdentifier: "UITabBarController") as! UITabBarController
+                                self.present(controller, animated: true, completion: nil)
                             }
                         }
                     }
                 }))
-                overrideAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                overrideAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 }))
-                self.presentViewController(overrideAlert, animated: true, completion: nil)
+                self.present(overrideAlert, animated: true, completion: nil)
             } else {
                 Parse.sharedInstance().postStudentLocation(self.locationTextField.text!, long: self.longitude, lat: self.latitude, mediaURL: self.mediaTextField.text!) { (success, error) in
                     performUIUpdatesOnMain {
@@ -80,8 +80,8 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
                             return
                         }
                         var controller: UITabBarController
-                        controller = self.storyboard!.instantiateViewControllerWithIdentifier("UITabBarController") as! UITabBarController
-                        self.presentViewController(controller, animated: true, completion: nil)
+                        controller = self.storyboard!.instantiateViewController(withIdentifier: "UITabBarController") as! UITabBarController
+                        self.present(controller, animated: true, completion: nil)
                     }
                 }
             }
@@ -89,8 +89,8 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
     }
 }
 
-    @IBAction func findButton(sender: AnyObject) {
-        activityIndicator.hidden = false
+    @IBAction func findButton(_ sender: AnyObject) {
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         let addressString = locationTextField.text!
         let findLocation = locateLocation()
@@ -101,12 +101,12 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
                     return
                 }
                 self.activityIndicator.stopAnimating()
-                self.activityIndicator.hidden = true
-                self.locationTextField.hidden = true
-                self.topView.hidden = true
-                self.findOnMapButton.hidden = true
-                self.mediaTextField.hidden = false
-                self.postButton.hidden = false
+                self.activityIndicator.isHidden = true
+                self.locationTextField.isHidden = true
+                self.topView.isHidden = true
+                self.findOnMapButton.isHidden = true
+                self.mediaTextField.isHidden = false
+                self.postButton.isHidden = false
                 let geoLocation: [CLPlacemark] = coordinates!
                 self.latitude = (geoLocation[0].location?.coordinate.latitude)!
                 self.longitude = (geoLocation[0].location?.coordinate.longitude)!
@@ -115,7 +115,7 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
             }
         }
 
-    func generateMap(latitude: Double, longitude: Double) {
+    func generateMap(_ latitude: Double, longitude: Double) {
         let lat = CLLocationDegrees(latitude)
         let long = CLLocationDegrees(longitude)
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -130,14 +130,14 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
         mapView.setRegion(region, animated: true)
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .Red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            pinView!.pinColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {
             pinView!.annotation = annotation
@@ -145,32 +145,32 @@ class PostLocationViewController: UIViewController, UITextFieldDelegate, MKMapVi
         return pinView
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
     
-    func displayAlert(text: String) {
+    func displayAlert(_ text: String) {
         self.activityIndicator.stopAnimating()
-        self.activityIndicator.hidden = true
-        let downloadAlert = UIAlertController(title: "Warning", message: text, preferredStyle: UIAlertControllerStyle.Alert)
-        downloadAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+        self.activityIndicator.isHidden = true
+        let downloadAlert = UIAlertController(title: "Warning", message: text, preferredStyle: UIAlertControllerStyle.alert)
+        downloadAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction!) in
         }))
-        self.presentViewController(downloadAlert, animated: true, completion: nil)
+        self.present(downloadAlert, animated: true, completion: nil)
     }
 
     
-    override func shouldAutorotate() -> Bool{
+    override var shouldAutorotate : Bool{
         return false
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.locationTextField.delegate = self
         self.mediaTextField.delegate = self
         mapView.delegate = self
-        self.postButton.hidden = true
-        self.mediaTextField.hidden = true
-        self.activityIndicator.hidden = true
+        self.postButton.isHidden = true
+        self.mediaTextField.isHidden = true
+        self.activityIndicator.isHidden = true
     }
 }
