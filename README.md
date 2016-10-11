@@ -1,0 +1,28 @@
+# On-The-Map
+
+## About the App:
+
+- Presents Udacity student locations on a map with their unique personal websites included. Allows users to post their own location and website as well. 
+
+## Requirements to Use the App:
+
+- When user's first open up the app, they are prompted to sign into the app using their Udacity account credentials. These credentials are necessary
+in order to use the app. User's can sign up from the login page of the app. 
+
+- The app is currently written for Swift 2.2 and for iOS 7-9. It is currently not compatible with Swift 3 or iOS 10.
+
+## Other Things to Know:
+
+- Very specific personal website URL's are required when posting your own webpage to the app, otherwise the app will not be able to find the url. 
+
+Core animations, Mapkit, WebViewControllers, and third party api's are used. 
+
+MIT License
+
+Copyright (c) [2016] [Christopher Weaver]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
