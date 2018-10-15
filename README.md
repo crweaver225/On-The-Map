@@ -14,7 +14,7 @@
 ![LoginController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/list-controller.png)
 ![MapController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/main-controller-pin.png)
 ![MapController. Share](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/pin-controller-location.png)
-![PinController. Location](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/Screen Shot 2018-10-14 at 10.00.27 PM.png)
+![PinController. Location](On-The-Map/ScreenShots/Screen Shot 2018-10-14 at 10.00.27 PM.png)
 
 ## Requirements to Use the App:
 
