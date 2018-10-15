@@ -1,5 +1,12 @@
 # On-The-Map
 
+
+# Requirements
+
+* iOS 8.0+
+* XCode 8.0+
+* Swift 3.0
+
 ## About the App:
 
 - Presents Udacity student locations on a map with their unique personal websites included. Allows users to post their own location and website as well. 
