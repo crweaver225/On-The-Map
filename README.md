@@ -11,10 +11,16 @@
 - Presents Udacity student locations on a map with their unique personal websites included. Allows users to post their own location and website as well. 
 
 
+
+
+
 ![LoginController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/list-controller.png)
 ![MapController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/main-controller-pin.png)
 ![MapController. Share](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/pin-controller-location.png)
-![PinController. Location](On-The-Map/ScreenShots/login.png)
+![PinController. Location](https://github.com/crweaver225/On-The-Map/ScreenShots/login.png)
+
+
+
 
 ## Requirements to Use the App:
 
