@@ -17,6 +17,7 @@
 ![LoginController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/list-controller.png)
 ![MapController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/main-controller-pin.png)
 ![MapController. Share](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/pin-controller-location.png)
+![MapController. Pin](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/map-controller.png)
 
 
 
