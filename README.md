@@ -11,14 +11,10 @@
 - Presents Udacity student locations on a map with their unique personal websites included. Allows users to post their own location and website as well. 
 
 
-![LoginController](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/login-controller.png)
-![MapController](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/map-controller.png)
-![MapController. Share](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/main-controller-pin.png)
-![PinController. Location](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/pin-controller-location.png)
-![PinController. Link](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/pin-controller-link.png)
-![MapController. Annotation](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/map-controller-annotation.png)
-![ListController](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/list-controller.png)
-![MainController. Logout](https://github.com/egorio/udacity-on-the-map/blob/master/Screenshots/main-controller-logout.png)
+![LoginController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/list-controller.png)
+![MapController](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/main-controller-pin)
+![MapController. Share](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/pin-controller-location)
+![PinController. Location](https://github.com/crweaver225/On-The-Map/blob/master/ScreenShots/Screen Shot 2018-10-14 at 10.00.27 PM)
 
 ## Requirements to Use the App:
 
